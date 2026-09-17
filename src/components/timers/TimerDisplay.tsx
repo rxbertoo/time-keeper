@@ -1,20 +1,42 @@
+import {useEffect} from "react";
 import {useTimer} from "../../hooks/useTimer.ts";
 import {DigitDisplay} from "../digits/DigitDisplay.tsx";
 
 export const TimerDisplay = () => {
-    const {time} = useTimer();
+    const {time, running} = useTimer();
+
+    useEffect(() => {
+        if (!time) return;
+        const isReset = time.minutes === '00' && time.seconds === '00' && time.milliseconds === '00';
+        if (isReset && !running) {
+            document.title = 'Cronómetro';
+        } else {
+            document.title = `${time.minutes}:${time.seconds} - Cronómetro`;
+        }
+    }, [time, running]);
+
 
     return (
-        <section
-            className="flex items-center justify-center h-30 text-7xl sm:text-8xl mb-5 sm:mb-10 font-light text-black-primary">
-            <DigitDisplay time={time?.minutes}/>
-            <h1 className="flex h-full items-end">:</h1>
-            <DigitDisplay time={time?.seconds}/>
-            <h1 className="flex h-full text-5xl sm:text-6xl items-end ">:</h1>
+        <section className="flex items-baseline justify-center font-light text-black-primary select-none">
+            <DigitDisplay
+                time={time?.minutes}
+                className="text-5xl sm:text-7xl md:text-8xl"
+            />
+            <span className="text-3xl sm:text-5xl md:text-6xl text-neutral-400 font-extralight px-0.5 sm:px-1">
+                :
+            </span>
+            <DigitDisplay
+                time={time?.seconds}
+                className="text-5xl sm:text-7xl md:text-8xl"
+            />
+            <span className="text-2xl sm:text-4xl md:text-5xl text-neutral-400 font-light px-0.5 sm:px-1">
+                :
+            </span>
             <DigitDisplay
                 time={time?.milliseconds}
-                className="text-5xl sm:text-6xl justify-start"
+                className="text-3xl sm:text-5xl md:text-6xl text-neutral-500 font-normal"
             />
         </section>
     );
 };
+

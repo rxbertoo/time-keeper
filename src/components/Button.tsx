@@ -2,16 +2,23 @@ interface ButtonProps {
     children?: React.ReactNode;
     onClick?: () => void;
     className?: string;
+    variant?: 'primary' | 'secondary';
 }
 
-export const Button = ({children, onClick, className}: ButtonProps) => {
+export const Button = ({children, onClick, className = "", variant = "primary"}: ButtonProps) => {
+    const baseStyles = "w-30 sm:w-36 h-10 sm:h-11 inline-flex items-center justify-center font-medium text-sm sm:text-base rounded-md cursor-pointer select-none active:scale-95 transition-all duration-150";
+
+    const variantStyles = variant === "secondary"
+        ? "bg-white text-neutral-800 border border-neutral-300 hover:bg-neutral-100 hover:border-neutral-400 shadow-xs"
+        : "bg-black-primary text-white hover:bg-black-secondary shadow-sm";
 
     return (
-        <button className={`w-34 h-10 sm:w-40  text-white font-medium rounded-sm bg-black-primary cursor-pointer shadow-md 
-        hover:bg-black-secondary duration-200
-        
-        ${className}`} onClick={onClick}>
+        <button
+            className={`${baseStyles} ${variantStyles} ${className}`}
+            onClick={onClick}
+        >
             {children}
         </button>
     );
 };
+

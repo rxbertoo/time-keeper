@@ -1,15 +1,12 @@
-
-interface  DigitDisplayProps {
+interface DigitDisplayProps {
     time?: string;
     className?: string;
 }
 
-export const DigitDisplay = ({time, className}: DigitDisplayProps) => {
+export const DigitDisplay = ({time = "00", className = ""}: DigitDisplayProps) => {
     return (
-        <section className={`flex items-end justify-center h-full w-21 sm:w-28 ${className}`}>
-            {
-                time
-            }
-        </section>
+        <span className={`inline-flex items-center justify-center tabular-nums ${className}`}>
+            {time}
+        </span>
     );
-};
+};
