@@ -9,9 +9,10 @@ export const CircleAnimation = () => {
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
             <div className="w-full h-full rounded-full border-2 border-neutral-300/70" />
             <div
-                className="absolute w-full h-full rounded-full border-2 border-transparent border-t-black-primary border-r-black-primary"
+                className={`absolute w-full h-full rounded-full border-2 border-transparent border-t-black-primary border-r-black-primary ${
+                    isReset && !running ? "" : "animate-spin-slow"
+                }`}
                 style={{
-                    animation: isReset && !running ? "none" : "spin 2.5s linear infinite",
                     animationPlayState: running ? "running" : "paused",
                 }}
             />
