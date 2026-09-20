@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+
+  base: '/time-keeper/',
+
   server: {
-    host: '0.0.0.0', // This is the key change!
-    port: 5173,      // Optional: Specify a port if you want
+    host: '0.0.0.0',
+    port: 5173,
   },
 })
