@@ -31,3 +31,47 @@ body, html {
     animation: spin 2.5s linear infinite;
 }
 
+@keyframes pulse-reset {
+    0% {
+        transform: scale(1);
+        border-color: rgba(212, 212, 212, 0.7);
+    }
+    40% {
+        transform: scale(1.035);
+        border-color: #A3A3A3;
+    }
+    100% {
+        transform: scale(1);
+        border-color: rgba(212, 212, 212, 0.7);
+    }
+}
+
+.animate-circle-reset {
+    animation: pulse-reset 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes digits-reset {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(0.92) translateY(3px);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(0.92) translateY(-3px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.animate-digits-reset {
+    animation: digits-reset 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+
+

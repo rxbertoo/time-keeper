@@ -1,23 +1,24 @@
-import {useEffect} from "react";
-import {useTimer} from "../../hooks/useTimer.ts";
-import {DigitDisplay} from "../digits/DigitDisplay.tsx";
+import { useEffect } from "react";
+import { useTimer } from "../../hooks/useTimer.ts";
+import { DigitDisplay } from "../digits/DigitDisplay.tsx";
 
 export const TimerDisplay = () => {
-    const {time, running} = useTimer();
+    const { time, running, isReset, isResetting } = useTimer();
 
     useEffect(() => {
         if (!time) return;
-        const isReset = time.minutes === '00' && time.seconds === '00' && time.milliseconds === '00';
         if (isReset && !running) {
             document.title = 'Cronómetro';
         } else {
             document.title = `${time.minutes}:${time.seconds} - Cronómetro`;
         }
-    }, [time, running]);
-
+    }, [time, running, isReset]);
 
     return (
-        <section className="flex items-baseline justify-center font-light text-black-primary select-none">
+        <section
+            className={`flex items-baseline justify-center font-light text-black-primary select-none ${isResetting ? "animate-digits-reset" : ""
+                }`}
+        >
             <DigitDisplay
                 time={time?.minutes}
                 className="text-5xl sm:text-7xl md:text-8xl"
@@ -39,4 +40,4 @@ export const TimerDisplay = () => {
         </section>
     );
 };
-
+
